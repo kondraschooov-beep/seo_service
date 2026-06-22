@@ -39,3 +39,7 @@ Thumbs.db
 tmp/
 temp/
 *.tmp
+# Archives
+*.zip
+*.rar
+*.7z

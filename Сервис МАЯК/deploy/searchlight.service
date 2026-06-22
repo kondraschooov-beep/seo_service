@@ -1,0 +1,17 @@
+[Unit]
+Description=Mayak SEO analytics (Next.js)
+After=network.target
+
+[Service]
+Type=simple
+User=mayak
+WorkingDirectory=/var/www/mayak/app
+ExecStart=/usr/bin/npm start
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=production
+Environment=PORT=3000
+# секреты лежат в /var/www/mayak/.env — его читает Next.js сам
+
+[Install]
+WantedBy=multi-user.target
