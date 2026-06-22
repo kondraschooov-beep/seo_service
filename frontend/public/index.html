@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SEOSmartReport</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 24px; }
+      .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .card { border: 1px solid #ddd; padding: 16px; border-radius: 8px; }
+      input { width: 100%; padding: 8px; margin: 6px 0; }
+      button { padding: 8px 12px; }
+      ul { padding-left: 18px; }
+      .row { display: flex; gap: 8px; }
+      .row > * { flex: 1; }
+      #status { margin-top: 12px; font-weight: 600; }
+      @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <h1>SEOSmartReport (MVP UI)</h1>
+    <p>Token: <strong id="token">none</strong></p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Register</h3>
+        <input id="reg_email" placeholder="email" />
+        <input id="reg_password" placeholder="password" type="password" />
+        <button onclick="app.register()">Register</button>
+      </div>
+
+      <div class="card">
+        <h3>Login</h3>
+        <input id="log_email" placeholder="email" />
+        <input id="log_password" placeholder="password" type="password" />
+        <button onclick="app.login()">Login</button>
+      </div>
+
+      <div class="card">
+        <h3>Projects</h3>
+        <input id="proj_name" placeholder="Project name" />
+        <input id="proj_domain" placeholder="example.com" />
+        <div class="row">
+          <button onclick="app.createProject()">Create</button>
+          <button onclick="app.loadProjects()">Refresh</button>
+        </div>
+        <ul id="projects"></ul>
+      </div>
+
+      <div class="card">
+        <h3>Integrations</h3>
+        <input id="redirect_uri" placeholder="OAuth redirect_uri" />
+        <div class="row">
+          <button onclick="app.getOAuthUrl('yandex')">Yandex OAuth URL</button>
+          <button onclick="app.getOAuthUrl('gsc')">GSC OAuth URL</button>
+        </div>
+        <small id="oauth_url" style="display:block; word-break: break-all;"></small>
+        <hr />
+        <input id="integration_id" placeholder="Integration ID" />
+        <input id="gsc_site_url" placeholder="GSC site_url (https://example.com/)" />
+        <input id="metrika_counter_id" placeholder="Metrika counter_id" />
+        <input id="webmaster_host_id" placeholder="Webmaster host_id" />
+        <input id="topvisor_project_id" placeholder="Topvisor project_id" />
+        <button onclick="app.updateIntegrationMeta()">Save integration meta</button>
+        <p style="margin-top: 8px; font-size: 12px;">Use full URL like https://example.com/</p>
+      </div>
+
+      <div class="card">
+        <h3>Reports</h3>
+        <input id="report_project_id" placeholder="Project ID" />
+        <input id="report_start" placeholder="YYYY-MM-DD" />
+        <input id="report_end" placeholder="YYYY-MM-DD" />
+        <button onclick="app.generateReport()">Generate</button>
+        <hr />
+        <input id="report_id" placeholder="Report ID" />
+        <div class="row">
+          <button onclick="app.checkReport()">Check</button>
+          <button onclick="app.downloadReport()">Download</button>
+          <button onclick="app.reportData()">Data</button>
+          <button onclick="app.renderReport()">Re-render</button>
+          <button onclick="app.previewReport()">Preview</button>
+        </div>
+        <pre id="report_data" style="white-space: pre-wrap; margin-top: 8px;"></pre>
+        <hr />
+        <div class="row">
+          <button onclick="app.loadComments()">Load Comments</button>
+        </div>
+        <ul id="comments"></ul>
+        <div class="row">
+          <input id="comment_id" placeholder="Comment ID" />
+          <input id="comment_text" placeholder="New text" />
+        </div>
+        <button onclick="app.updateComment()">Update Comment</button>
+        <hr />
+        <button onclick="app.loadLogs()">Load Logs</button>
+        <ul id="logs"></ul>
+      </div>
+    </div>
+
+    <div id="status">Ready</div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
